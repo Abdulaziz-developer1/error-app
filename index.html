@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error app</title>
+    <style>
+        .dynamic-div {
+            position: absolute;
+            width: 200px;
+            height: 150px;
+            background-color: lightblue;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        img{
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.getElementById('container');
+
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault(); // Prevent default right-click menu
+
+                const newDiv = document.createElement('div');
+                newDiv.className = 'dynamic-div';
+                newDiv.style.left = e.clientX + 'px';
+                newDiv.style.top = e.clientY + 'px';
+                newDiv.innerHTML = '<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Generic_error_message.svg/800px-Generic_error_message.svg.png">'
+
+                container.appendChild(newDiv);
+            });
+
+            // Optional: Remove all divs on left-click
+            document.addEventListener('click', function() {
+                const divs = document.querySelectorAll('.dynamic-div');
+                divs.forEach(div => div.remove());
+            });
+        });
+    </script>
+</body>
+</html>
